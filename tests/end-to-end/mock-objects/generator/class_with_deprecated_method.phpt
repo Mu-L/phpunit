@@ -37,7 +37,10 @@ class MockFoo extends ClassWithDeprecatedMethod implements PHPUnit\Framework\Moc
 
     public function deprecatedMethod()
     {
-        @trigger_error('The ClassWithDeprecatedMethod::deprecatedMethod method is deprecated (this method is deprecated).', E_USER_DEPRECATED);
+        PHPUnit\Event\Facade::emitter()->testCalledDoubleOfDeprecatedMethod(
+            new PHPUnit\Event\Code\ClassMethod('ClassWithDeprecatedMethod', 'deprecatedMethod'),
+            'this method is deprecated'
+        );
 
         $__phpunit_arguments = [];
         $__phpunit_count     = func_num_args();

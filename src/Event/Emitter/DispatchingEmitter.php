@@ -9,6 +9,7 @@
  */
 namespace PHPUnit\Event;
 
+use PHPUnit\Event\Code\ClassMethod;
 use PHPUnit\Event\Code\ComparisonFailure;
 use PHPUnit\Event\Code\Throwable;
 use PHPUnit\Event\TestSuite\Filtered as TestSuiteFiltered;
@@ -844,6 +845,21 @@ final class DispatchingEmitter implements Emitter
             new Test\PhpunitWarningTriggered(
                 $this->telemetryInfo(),
                 $test,
+                $message,
+            )
+        );
+    }
+
+    /**
+     * @throws InvalidArgumentException
+     * @throws UnknownEventTypeException
+     */
+    public function testCalledDoubleOfDeprecatedMethod(ClassMethod $method, string $message): void
+    {
+        $this->dispatcher->dispatch(
+            new Test\DoubleOfDeprecatedMethodCalled(
+                $this->telemetryInfo(),
+                $method,
                 $message,
             )
         );

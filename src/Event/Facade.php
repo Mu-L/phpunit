@@ -215,6 +215,7 @@ final class Facade
             Test\TestProxyCreated::class,
             Test\TestStubCreated::class,
             Test\TestStubForIntersectionOfInterfacesCreated::class,
+            Test\DoubleOfDeprecatedMethodCalled::class,
 
             TestRunner\BootstrapFinished::class,
             TestRunner\Configured::class,

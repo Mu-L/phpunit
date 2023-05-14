@@ -26,7 +26,10 @@ print $code;
 
 public function bar()
     {
-        @trigger_error('The Foo::bar method is deprecated (some explanation).', E_USER_DEPRECATED);
+        PHPUnit\Event\Facade::emitter()->testCalledDoubleOfDeprecatedMethod(
+            new PHPUnit\Event\Code\ClassMethod('Foo', 'bar'),
+            'some explanation'
+        );
 
         $__phpunit_arguments = [];
         $__phpunit_count     = func_num_args();

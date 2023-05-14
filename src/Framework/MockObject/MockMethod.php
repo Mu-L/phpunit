@@ -153,12 +153,13 @@ final class MockMethod
         $deprecation = $this->deprecation;
 
         if (null !== $this->deprecation) {
-            $deprecation         = "The {$this->className}::{$this->methodName} method is deprecated ({$this->deprecation}).";
             $deprecationTemplate = $this->loadTemplate('deprecation.tpl');
 
             $deprecationTemplate->setVar(
                 [
-                    'deprecation' => var_export($deprecation, true),
+                    'class_name'  => $this->className,
+                    'method_name' => $this->methodName,
+                    'deprecation' => $this->deprecation,
                 ]
             );
 

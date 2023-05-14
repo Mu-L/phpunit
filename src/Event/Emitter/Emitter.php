@@ -9,6 +9,7 @@
  */
 namespace PHPUnit\Event;
 
+use PHPUnit\Event\Code\ClassMethod;
 use PHPUnit\Event\Code\ComparisonFailure;
 use PHPUnit\Event\Code\Throwable;
 use PHPUnit\Event\TestSuite\TestSuite;
@@ -175,6 +176,8 @@ interface Emitter
     public function testTriggeredPhpunitError(Code\Test $test, string $message): void;
 
     public function testTriggeredPhpunitWarning(Code\Test $test, string $message): void;
+
+    public function testCalledDoubleOfDeprecatedMethod(ClassMethod $method, string $message): void;
 
     /**
      * @psalm-param non-empty-string $output
