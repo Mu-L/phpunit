@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.9.0@8b9ad1eb9e8b7d3101f949291da2b9f7767cd163">
+<files psalm-version="5.11.0@c9b192ab8400fdaf04b2b13d110575adc879aa90">
   <file src="src/Event/Dispatcher/DirectDispatcher.php">
     <UndefinedInterfaceMethod>
       <code>notify</code>
     </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/Event/Emitter/DispatchingEmitter.php">
+    <RedundantCondition>
+      <code>assert($test instanceof TestMethod)</code>
+    </RedundantCondition>
   </file>
   <file src="src/Event/Events/Test/HookMethod/AfterLastTestMethodFinished.php">
     <PropertyTypeCoercion>

@@ -21,16 +21,19 @@ final class DoubleOfDeprecatedMethodCalledTest extends AbstractEventTestCase
     public function testConstructorSetsValues(): void
     {
         $telemetryInfo = $this->telemetryInfo();
+        $test          = $this->testValueObject();
         $method        = new ClassMethod('ClassName', 'methodName');
         $message       = 'message';
 
         $event = new DoubleOfDeprecatedMethodCalled(
             $telemetryInfo,
+            $test,
             $method,
             $message,
         );
 
         $this->assertSame($telemetryInfo, $event->telemetryInfo());
+        $this->assertSame($test, $event->test());
         $this->assertSame($method, $event->method());
         $this->assertSame($message, $event->message());
     }
@@ -39,6 +42,7 @@ final class DoubleOfDeprecatedMethodCalledTest extends AbstractEventTestCase
     {
         $event = new DoubleOfDeprecatedMethodCalled(
             $this->telemetryInfo(),
+            $this->testValueObject(),
             new ClassMethod('ClassName', 'methodName'),
             'message',
         );

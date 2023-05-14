@@ -11,6 +11,7 @@ namespace PHPUnit\Event\Test;
 
 use function sprintf;
 use PHPUnit\Event\Code\ClassMethod;
+use PHPUnit\Event\Code\Test;
 use PHPUnit\Event\Event;
 use PHPUnit\Event\Telemetry;
 
@@ -22,12 +23,14 @@ use PHPUnit\Event\Telemetry;
 final class DoubleOfDeprecatedMethodCalled implements Event
 {
     private readonly Telemetry\Info $telemetryInfo;
+    private readonly Test $test;
     private readonly ClassMethod $method;
     private readonly string $message;
 
-    public function __construct(Telemetry\Info $telemetryInfo, ClassMethod $method, string $message)
+    public function __construct(Telemetry\Info $telemetryInfo, Test $test, ClassMethod $method, string $message)
     {
         $this->telemetryInfo = $telemetryInfo;
+        $this->test          = $test;
         $this->method        = $method;
         $this->message       = $message;
     }
@@ -35,6 +38,11 @@ final class DoubleOfDeprecatedMethodCalled implements Event
     public function telemetryInfo(): Telemetry\Info
     {
         return $this->telemetryInfo;
+    }
+
+    public function test(): Test
+    {
+        return $this->test;
     }
 
     public function method(): ClassMethod
