@@ -27,6 +27,7 @@ use PHPUnit\Logging\TeamCity\TeamCityLogger;
 use PHPUnit\Logging\TestDox\HtmlRenderer as TestDoxHtmlRenderer;
 use PHPUnit\Logging\TestDox\PlainTextRenderer as TestDoxTextRenderer;
 use PHPUnit\Logging\TestDox\TestResultCollector as TestDoxResultCollector;
+use PHPUnit\Logging\Xml\XmlLogger;
 use PHPUnit\Metadata\Api\CodeCoverage as CodeCoverageMetadataApi;
 use PHPUnit\Runner\CodeCoverage;
 use PHPUnit\Runner\Extension\ExtensionBootstrapper;
@@ -537,6 +538,13 @@ final class Application
                     $configuration->logEventsVerboseText(),
                     true,
                 ),
+            );
+        }
+
+        if ($configuration->hasLogfileXml()) {
+            new XmlLogger(
+                OutputFacade::printerFor($configuration->logfileXml()),
+                EventFacade::instance(),
             );
         }
 
