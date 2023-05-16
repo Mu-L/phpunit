@@ -5,11 +5,6 @@
       <code>notify</code>
     </UndefinedInterfaceMethod>
   </file>
-  <file src="src/Event/Emitter/DispatchingEmitter.php">
-    <RedundantCondition>
-      <code>assert($test instanceof TestMethod)</code>
-    </RedundantCondition>
-  </file>
   <file src="src/Event/Events/Test/HookMethod/AfterLastTestMethodFinished.php">
     <PropertyTypeCoercion>
       <code>$calledMethods</code>

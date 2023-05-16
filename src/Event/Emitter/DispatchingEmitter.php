@@ -9,7 +9,6 @@
  */
 namespace PHPUnit\Event;
 
-use function assert;
 use PHPUnit\Event\Code\ClassMethod;
 use PHPUnit\Event\Code\ComparisonFailure;
 use PHPUnit\Event\Code\TestMethod;
@@ -34,7 +33,6 @@ final class DispatchingEmitter implements Emitter
     private readonly Telemetry\System $system;
     private readonly Telemetry\Snapshot $startSnapshot;
     private Telemetry\Snapshot $previousSnapshot;
-    private ?TestMethod $currentTestMethod = null;
 
     public function __construct(Dispatcher $dispatcher, Telemetry\System $system)
     {
@@ -380,12 +378,6 @@ final class DispatchingEmitter implements Emitter
                 $test
             )
         );
-
-        if ($test->isTestMethod()) {
-            assert($test instanceof TestMethod);
-
-            $this->currentTestMethod = $test;
-        }
     }
 
     /**
@@ -863,14 +855,12 @@ final class DispatchingEmitter implements Emitter
      * @throws InvalidArgumentException
      * @throws UnknownEventTypeException
      */
-    public function testCalledDoubleOfDeprecatedMethod(ClassMethod $method, string $message): void
+    public function testCalledDoubleOfDeprecatedMethod(TestMethod $test, ClassMethod $method, string $message): void
     {
-        assert($this->currentTestMethod !== null);
-
         $this->dispatcher->dispatch(
             new Test\DoubleOfDeprecatedMethodCalled(
                 $this->telemetryInfo(),
-                $this->currentTestMethod,
+                $test,
                 $method,
                 $message,
             )
@@ -906,8 +896,6 @@ final class DispatchingEmitter implements Emitter
                 $numberOfAssertionsPerformed
             )
         );
-
-        $this->currentTestMethod = null;
     }
 
     /**

@@ -11,6 +11,7 @@ namespace PHPUnit\Event;
 
 use PHPUnit\Event\Code\ClassMethod;
 use PHPUnit\Event\Code\ComparisonFailure;
+use PHPUnit\Event\Code\TestMethod;
 use PHPUnit\Event\Code\Throwable;
 use PHPUnit\Event\TestSuite\TestSuite;
 use PHPUnit\Framework\Constraint;
@@ -177,7 +178,7 @@ interface Emitter
 
     public function testTriggeredPhpunitWarning(Code\Test $test, string $message): void;
 
-    public function testCalledDoubleOfDeprecatedMethod(ClassMethod $method, string $message): void;
+    public function testCalledDoubleOfDeprecatedMethod(TestMethod $test, ClassMethod $method, string $message): void;
 
     /**
      * @psalm-param non-empty-string $output
